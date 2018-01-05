@@ -6,9 +6,8 @@ class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            credet: [{useremail:[],
-                password:[]}]
-
+            useremail:[],
+            password:[]
 
         }
         this.app = firebase.initializeApp(database_config);
@@ -28,10 +27,13 @@ class Signup extends Component {
         })
 
     }
+
     pushCredentials(useremail, password){
         this.db.push().set({useremail: useremail, password:password})
 
     }
+
+
     signupSubmit(useremail, password){
         this.db.push().set({useremail: useremail, password: password})
     }
@@ -68,7 +70,7 @@ class Signup extends Component {
                                                 </div>
                                                 <input type="email" id="username" className="form-control"
                                                        value={this.state.useremail}
-                                                       onChange={event => this.setState({credet.useremail : event.target.value})}></input>
+                                                       onChange={event => this.setState({useremail : event.target.value})}></input>
                                             </div>
                                             <div className="input-group">
                                                 <label for="password">Password</label>
