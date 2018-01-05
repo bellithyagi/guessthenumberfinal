@@ -1,0 +1,109 @@
+
+.login, .landingcontainer {
+    background-size: cover;
+    background: linear-gradient(45deg, #4099ff, #73b4ff);
+    color: #fff;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+
+.signup-container {
+    width: 450px;
+    margin: 10px auto;
+}
+.login-card {
+    border-radius: 30px;
+    position: relative;
+    display: block;
+    margin: 15px 0;
+}
+.auth-box {
+    background-color: #fff;
+    border-radius: 8px;
+    margin: 25% 0 0 0;
+    padding: 20px;
+    -webkit-box-shadow: 0 2px 18px -2px black;
+    box-shadow: 0 2px 18px -2px black;
+}
+.login-card h3 {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+.login .input-group {
+    margin-bottom: 1.25em;
+    display: block !important;
+}
+
+.login .input-group .form-control{
+    box-shadow: none;
+    font-size: 14px;
+    border-radius: 2px;
+    border: 1px solid #cccccc;
+    margin-bottom: 20px !important;
+    text-indent: 1.875rem;
+
+}
+.login .auth-box label{
+    color: #666666;
+    margin-bottom:5px;
+    font-weight: normal;
+}
+.login .input-group-addon {
+    /* top: 0; */
+    /* bottom: 0; */
+    left: 10px;
+    position: absolute;
+    pointer-events: none;
+    vertical-align: middle !important;
+    z-index: 999;
+    padding: 0 !important;
+    border: 0!important;
+    color: #424770 !important;
+    margin-top: 10px;
+    background-color: #ffffff !important;
+}
+.btn-md {
+    padding: 8px 16px;
+    font-size: 15px;
+    line-height: 23px;
+    background-color: #4099ff;
+    border-color: #4099ff;
+    -webkit-transition: all ease-in 0.3s;
+    transition: all ease-in 0.3s;
+}
+.btn-md:hover {
+    background-color: #73b4ff;
+    border-color: #73b4ff;
+}
+.createaccount {
+    color: #222;
+    margin-top: 10px;
+    display: inline-block;
+    margin-right: 10px;
+}
+/*Landing page*/
+.landingcontainer .form-control{
+    width: inherit;
+}
+.panel-number{
+    color: #000;
+}
+
+.landingcontainer .input-group{
+    width: 300px;
+    margin: 10px auto;
+}
+
+.numberrange{
+    margin: 10px 0 20px !important;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.logoff .btn{
+    margin: 20px;
+}
