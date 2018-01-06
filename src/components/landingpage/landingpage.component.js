@@ -8,10 +8,11 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 
 class Landingpage extends Component {
+    debugger;
     constructor(props) {
         super(props);
-        this.useremail = props.this.app = firebase.initializeApp(database_config);
-        this.db = this.app.database().ref().child('typedNumber')
+        this.app = firebase.initializeApp(database_config);
+        this.db = this.app.database().ref().child('typedNumber');
 
         this.state = {
             typedNumber: []
@@ -34,7 +35,11 @@ class Landingpage extends Component {
 
     }
 
-    addNumber(number) {
+    addNumber=(number) => {
+        if(number === this.state.hiddenNumber){
+            debugger;
+            console.log('success');
+        }
         if (this.state.typedNumber.length < 3) {
             this.db.push().set({addedNumber: number})
         } else {
@@ -48,15 +53,6 @@ class Landingpage extends Component {
         console.log(this.state.typedNumber.length);
     }
 
-    attemptPopup() {
-        return (
-            <div>
-                <div className="alert alert-danger" role="alert"><strong>Oh snap!</strong> Change a few things up and
-                    try submitting again.
-                </div>
-            </div>
-        )
-    }
 
     render() {
         return (
@@ -86,6 +82,5 @@ class Landingpage extends Component {
 
 Signin.propTypes = {
     useremail: PropTypes.string
-
 }
 export default Landingpage;

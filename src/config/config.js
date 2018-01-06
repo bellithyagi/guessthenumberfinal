@@ -7,3 +7,4 @@ export const database_config = {
     storageBucket: "guessthenumber-f96d5.appspot.com",
     messagingSenderId: "403877473300"
 };
+
