@@ -1,26 +1,13 @@
 import React, { Component } from 'react';
-import Signup from './components/signup/signup.component';
-import Signin from './components/signin/signin.component';
-import Landingpage from './components/landingpage/landingpage.component';
-import {
-    BrowserRouter as Router,
-    Route,
-    Link
-} from 'react-router-dom';
-
 
 class App extends Component {
-  render() {
-    return (
+    render() {
+        return (
             <div >
-                <Signup/>
-                {/*<Landingpage useremail ="Belli"/>*/}
-             {/*   <Signin/>*/}
+                {this.props.children}
             </div>
-
-
-    );
-  }
+        );
+    }
 }
 
 export default App;

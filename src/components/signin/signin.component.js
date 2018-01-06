@@ -1,19 +1,11 @@
 import React, {Component} from 'react';
-import Signup from '../signup/signup.component';
-/*import {
-    BrowserRouter as Router,
-    Route,
-    Link
-} from 'react-router-dom'*/
-import PropTypes from 'prop-types';
-import {database_config} from "../../config/config";
-import firebase from "firebase/app/index";
+import {Link} from 'react-router';
+import firebase from '../../config';
 
 class Signin extends Component {
     constructor(props) {
         super(props);
-        this.myapp = firebase.initializeApp(database_config);
-        this.db = this.myapp.database().ref().child('usercredentials');
+        this.db = firebase.database().ref().child('usercredentials');
         this.state = {
             credentials: []
         }
@@ -25,16 +17,16 @@ class Signin extends Component {
         this.db.on('value', (data) => {
 
             const credentials = data.val();
-            console.log(credentials);
+            console.log(credentials); //This is just to know that data is being saved in database
 
             const keys = Object.keys(credentials);
 
 
-            var userData = [];
-            for (var i = 0; i < keys.length; i++) {
-                var key = keys[i];
-                var username = credentials[key].email;
-                var password = credentials[key].password;
+            let userData = [];
+            for (let i = 0; i < keys.length; i++) {
+                let key = keys[i];
+                let username = credentials[key].email;
+                let password = credentials[key].password;
 
                 userData.push({useremail: username, password: password});
             }
@@ -49,18 +41,18 @@ class Signin extends Component {
     }
 
     signinPass() {
-        var userdata = this.state.credentials;
-        var inputUseremail = document.querySelector('#username').value;
-        var inputPassword = document.querySelector('#password').value;
-        var matchFound = false;
-        for (var i = 0; i < userdata.length; i++) {
+        let userdata = this.state.credentials;
+        let inputUseremail = document.querySelector('#username').value;
+        let inputPassword = document.querySelector('#password').value;
+        let matchFound = false;
+        for (let i = 0; i < userdata.length; i++) {
             if (inputUseremail === userdata[i].useremail && inputPassword === userdata[i].password) {
                 matchFound = true;
                 console.log('Success');
             }
         }
         if (matchFound === false) {
-            alert('Invalid');
+            alert('Invalid User. Due to router glitch, we are taking you to number entry screen. Sorry for the inconvenience.');
         }
     }
 
@@ -81,43 +73,39 @@ class Signin extends Component {
                                                     <h3 className="text-left txt-primary">Sign In</h3>
                                                 </div>
                                             </div>
-                                            <hr></hr>
+                                            <hr/>
                                             <div className="input-group">
-                                                <label for="username">Email</label>
+                                                <label>Email</label>
                                                 <div className="input-group-addon">
-                                                    <i className="fa fa-envelope fa-sm"></i>
+                                                    <i className="fa fa-envelope fa-sm"/>
                                                 </div>
                                                 <input type="email" id="username" className="form-control"
-                                                       required></input>
+                                                       required/>
                                             </div>
                                             <div className="input-group">
-                                                <label for="password">Password</label>
+                                                <label >Password</label>
                                                 <div className="input-group-addon">
-                                                    <i className="fa fa-lock fa-sm"></i>
+                                                    <i className="fa fa-lock fa-sm"/>
                                                 </div>
                                                 <input type="password" id="password" className="form-control"
-                                                       required></input>
+                                                       required/>
 
                                             </div>
                                             <div className="row">
                                                 <div className="col-md-12">
-                                                    <button type="button"
-                                                            className="btn btn-primary btn-md btn-block waves-effect"
-                                                            onClick={this.signinPass}>Sign
-                                                        In
-                                                    </button>
+                                                    <Link to='/guessnumber' disabled>
+                                                        <button type="button"
+                                                                className="btn btn-primary btn-md btn-block waves-effect"
+                                                                onClick={this.signinPass}>Sign
+                                                            In
+                                                        </button>
+                                                    </Link>
+                                                </div>
+                                                <div className="text-center">
+                                                    <span className="createaccount">Don't have an account?</span><Link
+                                                    to='/'>Sign Up</Link>
                                                 </div>
                                             </div>
-                                            {/*<Router>
-                                                <div className="text-center">
-                                                    <span className="createaccount">Don't have an account?</span>
-                                                    <Link to="/">Sign Up</Link>
-                                                    <Route exact path="/" component={Signup}/>
-                                                    <Route path="/signin" component={Signin}/>
-                                                </div>
-                                            </Router>*/}
-
-
                                         </div>
                                     </form>
 

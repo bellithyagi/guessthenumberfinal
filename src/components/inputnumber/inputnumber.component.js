@@ -6,8 +6,9 @@ const Inputnumber = (props) => {
             <div>
                 <div className="panel panel-number">
                     <div className="panel-body">
-                        You just did type the number,
-                        {props.addedNumber}
+                        <span>
+                        <i>You just did type the number,
+                            <b>{props.addedNumber}</b></i></span>
                     </div>
                 </div>
             </div>

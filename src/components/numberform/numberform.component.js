@@ -24,7 +24,7 @@ class Numberform extends Component {
                 showsuccesMessage: true
             })
         }
-        if (this.state.newNumber.length) {
+        if (this.state.newNumber.length && this.state.newNumber != this.state.hiddenNumber) {
             this.props.addNumber(this.state.newNumber);
         }
 
@@ -46,7 +46,7 @@ class Numberform extends Component {
 
     render() {
         const showsuccesMessage = this.state.showsuccesMessage;
-        var successmessage;
+        let successmessage;
         if (showsuccesMessage) {
             successmessage = this.attemptPopup();
         }
@@ -57,7 +57,7 @@ class Numberform extends Component {
                     <div className="col-md-12">
                         <div className="input-group">
                             <input type="number" className="form-control" placeholder="Type the number"
-                                   value={this.state.newNumber} onChange={this.handleUserinput}></input>
+                                   value={this.state.newNumber} onChange={this.handleUserinput}/>
                             <span className="input-group-btn">
         <button className="btn btn-primary" type="button" onClick={this.submitNumber}>Check</button>
       </span>

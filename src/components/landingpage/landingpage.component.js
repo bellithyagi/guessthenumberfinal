@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
 import Signin from "../signin/signin.component";
-import PropTypes from 'prop-types';
 import Inputnumber from '../inputnumber/inputnumber.component';
 import Numberform from '../numberform/numberform.component';
-import {database_config} from "../../config/config";
-import firebase from 'firebase/app';
-import 'firebase/database';
+import firebase from '../../config'
+import {Link} from 'react-router';
 
 class Landingpage extends Component {
-    debugger;
+
     constructor(props) {
         super(props);
-        this.app = firebase.initializeApp(database_config);
-        this.db = this.app.database().ref().child('typedNumber');
+        this.db = firebase.database().ref().child('typedNumber');
 
         this.state = {
             typedNumber: []
@@ -37,7 +34,6 @@ class Landingpage extends Component {
 
     addNumber=(number) => {
         if(number === this.state.hiddenNumber){
-            debugger;
             console.log('success');
         }
         if (this.state.typedNumber.length < 3) {
@@ -50,7 +46,7 @@ class Landingpage extends Component {
 
             }
         }
-        console.log(this.state.typedNumber.length);
+        console.log(this.state.typedNumber.length); //This is to know that user entered number is being saved in the database
     }
 
 
@@ -58,10 +54,12 @@ class Landingpage extends Component {
         return (
             <div className="landingcontainer">
                 <div className="logoff clearfix">
-                    <btn className="btn pull-right"><i className="fa fa-power-off fa-2x"></i> </btn>
+                    <Link to='/signin'>
+                    <button className="btn btn-primary pull-right">Log Out <i className="fa fa-power-off fa-1x"></i> </button>
+                    </Link>
                 </div>
                 <div className="container">
-                    <h2 className="text-center">Welcome {this.useremail} </h2>
+                    <h2 className="text-center">Welcome</h2>
                     <Numberform addNumber={this.addNumber}/>
 
                     <div className="alertcontainer"></div>
@@ -80,7 +78,4 @@ class Landingpage extends Component {
     }
 }
 
-Signin.propTypes = {
-    useremail: PropTypes.string
-}
 export default Landingpage;

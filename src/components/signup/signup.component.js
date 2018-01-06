@@ -1,65 +1,40 @@
 import React, {Component} from 'react';
-import {database_config} from "../../config/config";
-import firebase from "firebase/app/index";
 import {
-    BrowserRouter as Router,
-    Route,
     Link
-} from 'react-router-dom';
-import Signin from "../signin/signin.component";
+} from 'react-router';
+import firebase from '../../config/index'
 
 class Signup extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             userCreds: {},
             email: '',
             password: '',
-            userWelcome: '',
             showSignin: false
         }
-        this.onsignUp = this.onsignUp.bind(this);
-        this.firebases = firebase.initializeApp(database_config);
-        this.userCredRef = this.firebases.database().ref().child('usercredentials');
-    }
-
-
-    componentWillMount = () => {
-        this.userCredRef.on('child_added', snapshot => {
-            let user = snapshot.val().email;
-            this.setState({
-                userWelcome: `Welcome ${user}!`
-            })
-        })
-
+        //const router= React.PropTypes;
+        this.userCredRef = firebase.database().ref().child('usercredentials');
     }
 
     signupSubmit = () => {
         const username = this.state.email;
         const password = this.state.password;
-        this.userCredRef.push().set({email: username, password: password})
-    }
-
-    submitCredentials = () => {
-        this.setState({
-            email: '',
-            password: ''
-        })
-    }
-    onsignUp = () =>{
-        this.setState({
-            showSignin: true,
-        });
+        this.userCredRef.push().set({email: username, password: password});
+        if (username && password) {
+            alert('Credentials saved successfully! You can press Sign-in link now');
+        }
     }
 
     render() {
         return (
-            <div>
+
                 <div className="login">
 
                     <div className="container">
                         <div className="row">
-                            {this.state.userWelcome && <div>{this.state.userWelcome}</div>}
+
                             <div className="col-sm-12">
 
                                 <div className="login-card">
@@ -70,48 +45,42 @@ class Signup extends Component {
                                                     <h3 className="text-left txt-primary">Sign Up</h3>
                                                 </div>
                                             </div>
-                                            <hr></hr>
+                                            <hr/>
                                             <div className="input-group">
-                                                <label for="username">Email</label>
+                                                <label>Email</label>
                                                 <div className="input-group-addon">
-                                                    <i className="fa fa-envelope fa-sm"></i>
+                                                    <i className="fa fa-envelope fa-sm"/>
                                                 </div>
                                                 <input type="email" id="username" className="form-control"
                                                        value={this.state.email}
-                                                       onChange={event => this.setState({email: event.target.value})}></input>
+                                                       onChange={event => this.setState({email: event.target.value})}
+                                                       required/>
                                             </div>
                                             <div className="input-group">
-                                                <label for="password">Password</label>
+                                                <label>Password</label>
                                                 <div className="input-group-addon">
-                                                    <i className="fa fa-lock fa-sm"></i>
+                                                    <i className="fa fa-lock fa-sm"/>
                                                 </div>
                                                 <input type="password" id="password" className="form-control"
                                                        value={this.state.password}
-                                                       onChange={event => this.setState({password: event.target.value})}></input>
-
-                                                <p>{this.state.useremail}</p>
+                                                       onChange={event => this.setState({password: event.target.value})}
+                                                       required/>
                                             </div>
 
                                             <div className="row">
                                                 <div className="col-md-12">
-                                                    <button type="submit"
-                                                            className="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"
-                                                            onClick={this.signupSubmit}>Sign
-                                                        Up
-                                                    </button>
+
+                                                    <input value="Sign Up" type="submit"
+                                                           className="btn btn-primary btn-md btn-block waves-effect text-center"
+                                                           onClick={this.signupSubmit}>
+                                                    </input>
 
                                                 </div>
                                                 <div className="text-center">
-                                                    <span className="createaccount">Do you have an account?</span><a onClick={this.onsignUp}>Sign In</a>
-                                                    {this.state.showSignin ?
-                                                        <Signin /> :
-                                                        null
-                                                    } </div>
-                                                <div>
-
+                                                    <span className="createaccount">Do you have an account?</span><Link
+                                                    to='/signin'>Sign In</Link>
                                                 </div>
                                             </div>
-
 
                                         </div>
                                     </form>
@@ -125,9 +94,15 @@ class Signup extends Component {
                     </div>
 
                 </div>
-            </div>
+
         )
     }
 }
+
+/*
+Signup.contextTypes = {
+  router: React.PropTypes.func.isRequired
+}; */
+
 
 export default Signup;
