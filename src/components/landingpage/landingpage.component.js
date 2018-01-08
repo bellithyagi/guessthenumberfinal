@@ -36,9 +36,7 @@ class Landingpage extends Component {
     addNumber=(number) => {
         if (this.state.typedNumber.length < 3) {
             this.db.push().set({addedNumber: number})
-        } else {
-            alert('You have exceeded your attempt limit');
-        }
+        } 
         console.log(this.state.typedNumber.length); //This is to know that user entered number is being saved in the database
     }
    
