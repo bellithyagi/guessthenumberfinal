@@ -71,7 +71,7 @@ class Numberform extends Component {
                         </div>
 
                     </div>
-                    <p className="rangeerror text-danger text-center">Please enter a number between the range 1-10</p>
+                    <p className="rangeerror text-center"><b>Please enter a number between the range 1-10</b></p>
                     <p className="text-center numberrange">You've
                         3 attempts to guess the number. </p>
 
