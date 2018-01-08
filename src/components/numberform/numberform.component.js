@@ -16,6 +16,13 @@ class Numberform extends Component {
         this.setState({
             newNumber: e.target.value
         })
+
+        if (parseInt(e.target.value) > 10) {
+
+            document.querySelector('.rangeerror').style.display = 'block';
+        } else {
+            document.querySelector('.rangeerror').style.display = 'none';
+        }
     }
     submitNumber = () => {
 
@@ -64,8 +71,10 @@ class Numberform extends Component {
                         </div>
 
                     </div>
-                    <p className="text-center numberrange">Enter the number between the range of 1-10 and totally you've
-                        3 attempts to guess the number </p>
+                    <p className="rangeerror text-danger text-center">Please enter a number between the range 1-10</p>
+                    <p className="text-center numberrange">Enter the number between the range 1-10. You've
+                        3 attempts to guess the number. </p>
+
 
                 </div>
                 <div className="row">
