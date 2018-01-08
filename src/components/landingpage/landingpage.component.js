@@ -12,7 +12,8 @@ class Landingpage extends Component {
         this.db = firebase.database().ref().child('typedNumber');
 
         this.state = {
-            typedNumber: []
+            typedNumber: [],
+            showerrorMessage: false
         }
         this.addNumber = this.addNumber.bind(this);
     }
@@ -30,27 +31,37 @@ class Landingpage extends Component {
             })
         })
 
+
     }
 
     addNumber=(number) => {
-        if(number === this.state.hiddenNumber){
-            console.log('success');
-        }
         if (this.state.typedNumber.length < 3) {
             this.db.push().set({addedNumber: number})
         } else {
             {
-                const alertContent = this.attemptPopup();
-                console.log(JSON.stringify(alertContent));
-                document.querySelector('.alertcontainer').textContent = alertContent;
+                this.setState({
+                    showerrorMessage: true
+                })
 
             }
         }
         console.log(this.state.typedNumber.length); //This is to know that user entered number is being saved in the database
     }
-
+    attemptPopup = () => {
+        return (
+            <div>
+                <div className="alert alert-danger" role="alert"><strong>Oops!</strong> You have exceeded your attempt limit
+                </div>
+            </div>
+        )
+    }
 
     render() {
+        const showerrorMessage = this.state.showerrorMessage;
+        let errormessage;
+        if (showerrorMessage) {
+            errormessage = this.attemptPopup();
+        }
         return (
             <div className="landingcontainer">
                 <div className="logoff clearfix">
@@ -60,8 +71,10 @@ class Landingpage extends Component {
                 </div>
                 <div className="container">
                     <h2 className="text-center">Welcome</h2>
-                    <Numberform addNumber={this.addNumber}/>
-
+                    <Numberform addNumber={this.addNumber} typedNumber = {this.state.typedNumber}/>
+                    <div className="row">
+                        <div className="col-md-6 col-md-offset-3">{errormessage}</div>
+                    </div>
                     <div className="alertcontainer"></div>
                     <div className="numberpanel">
                         {
