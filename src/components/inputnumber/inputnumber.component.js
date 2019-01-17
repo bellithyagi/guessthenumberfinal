@@ -9,6 +9,7 @@ const Inputnumber = (props) => {
                         <span>
                         <i>You just did type the number,
                             <b>{props.addedNumber}</b></i></span>
+						<p>Pradyu</p>
                     </div>
                 </div>
             </div>
